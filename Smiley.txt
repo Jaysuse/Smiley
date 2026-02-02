@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oge ??</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.card {
+  background: white;
+  padding: 28px;
+  border-radius: 20px;
+  text-align: center;
+  width: 90%;
+  max-width: 360px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+}
+
+h1 { color: #e63946; }
+button {
+  padding: 14px 26px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#yes { background: #e63946; color: white; }
+#no, .fake { background: #ddd; position: absolute; }
+
+.buttons { position: relative; height: 120px; }
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.hidden { display: none; }
+</style>
+</head>
+
+<body>
+
+<!-- LOCK SCREEN -->
+<div class="card" id="lock">
+  <h1>Oge ??</h1>
+  <p>Will you be my Valentine?</p>
+  <div class="buttons">
+    <button id="yes">YES ??</button>
+    <button id="no">NO ??</button>
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="card hidden" id="formCard">
+  <h1>One last step ??</h1>
+
+  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <input name="email" type="email" placeholder="Your email ??" required>
+    <textarea name="address" placeholder="Your home address ??" required></textarea>
+    <button type="submit">Submit ??</button>
+  </form>
+</div>
+
+<!-- DATE REVEAL -->
+<div class="card hidden" id="date">
+  <h1>?? DATE REVEAL ??</h1>
+  <p>
+    Dinner ???  
+    Flowers ??  
+    Chocolate ??  
+    Amazing company ??  
+  </p>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const lock = document.getElementById("lock");
+const form = document.getElementById("formCard");
+const date = document.getElementById("date");
+
+let chaos = 400;
+
+noBtn.addEventListener("mouseover", spawnFake);
+
+function spawnFake() {
+  move(noBtn);
+  for (let i = 0; i < 2; i++) {
+    const fake = document.createElement("button");
+    fake.innerText = "Are you sure? ??";
+    fake.className = "fake";
+    document.body.appendChild(fake);
+    move(fake);
+    fake.onmouseover = () => move(fake);
+    setTimeout(() => fake.remove(), 2000);
+  }
+  chaos += 100;
+}
+
+function move(btn) {
+  btn.style.left = Math.random() * chaos + "px";
+  btn.style.top = Math.random() * 120 + "px";
+}
+
+yesBtn.onclick = () => {
+  lock.classList.add("hidden");
+  form.classList.remove("hidden");
+};
+
+// WhatsApp after submit
+const phoneNumber = "234XXXXXXXXXX";
+document.querySelector("form").addEventListener("submit", () => {
+  setTimeout(() => {
+    form.classList.add("hidden");
+    date.classList.remove("hidden");
+    window.open(
+      `https://wa.me/${phoneNumber}?text=I%20said%20YES%20??%20Valentine’s%20Day%20is%20locked%20in!`,
+      "_blank"
+    );
+  }, 500);
+});
+</script>
+
+</body>
+</html>
